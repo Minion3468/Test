@@ -67,4 +67,19 @@ public class PlayerControler : MonoBehaviour
 
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject target = collision.gameObject;
+        if (target.CompareTag("Enemy"))
+        {
+            //game over
+            Time.timeScale = 0;
+            GameObject gameOverScreen = GameObject.Find("Canvas").transform.Find("GameOverScreen").gameObject;
+            gameOverScreen.SetActive(true);
+
+            Destroy(target);
+            Destroy(this.gameObject);
+        }
+
+    }
 }
